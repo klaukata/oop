@@ -10,8 +10,6 @@ using System.Security.Cryptography;
 using System.Xml.Linq;
 using System.Diagnostics;
 
-// The solutions should be defined using methods and appropriately called in the main function.
-
 
 // 1. Write a program to calculate the discriminant (delta) and roots of a quadratic equation.
 
@@ -347,22 +345,91 @@ class ExerciseFive
 
 class ExerciseSix
 {
-    static void Main()
+    static void MainSix()  // there can be only one Main method in a single .cs file. Remove "Six" from this method name for it to work
     {
         while (true)
         {
             Console.Write("Enter an ineger: ");
             int input;
-            while (!int.TryParse(Console.ReadLine(), out input))
+            while (!int.TryParse(Console.ReadLine(), out input))    // validate an input
             {
                 Console.WriteLine("Your input is not an integer. Try again.");
-                Console.Write("Enter an ineger: ");
+                Console.Write("Enter an integer: ");
             }
-            if (input < 0)
+            if (input < 0)  // check exit condition
             {
                 Console.WriteLine("Provided integer is smaller than 0. Bye!");
                 break;
             }
         }
+    }
+}
+
+
+// 7. Write a program that allows input of n numbers and sorts these numbers using the bubble sort or insertion sort method. Display the results on the console.
+
+class ExerciseSeven
+{
+    static void MainSeven()  // there can be only one Main method in a single .cs file. Remove "Seven" from this method name for it to work
+    {
+        int n = InputN();
+        while (n < 1)
+        {
+            Console.WriteLine("Length of an array can't be negative or zero.");
+            n = InputN();
+
+        }
+        Console.WriteLine($"Enter values for the array now.");
+        double[] arr = InputArrayValues(n);
+        Console.WriteLine($"Unsorted array = [{PrintArray(arr)}]");
+        ApplyInsertionSort(arr);
+        Console.WriteLine($"Sorted array = [{PrintArray(arr)}]");
+    }
+    static int InputN()
+    {
+        Console.Write("Enter a length of an array: ");
+        int len;
+        while (!int.TryParse(Console.ReadLine(), out len))
+        {
+            Console.WriteLine("Provided value is not an integer.");
+            Console.Write("Enter a length of an array: ");
+
+        }
+        return len;
+    }
+
+    static double[] InputArrayValues(int n)
+    {
+        double[] arr = new double[n];
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Enter a value for index = {i}: ");
+            double val;
+            while (!double.TryParse(Console.ReadLine(), out val)) {
+                Console.Write("Provided value is not a double. Try again: ");
+            }
+            arr[i] = val;
+        }
+        return arr;
+    }
+
+    static double[] ApplyInsertionSort(double[] arr)
+    {
+        for (int i = 1; i < arr.Length; i++)
+        {
+            double key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key)
+            {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+        return arr;
+    }
+
+    static string PrintArray(double[] arr) {
+        return string.Join(", ", arr);
     }
 }
