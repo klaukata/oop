@@ -81,7 +81,7 @@ class ExerciseOne
 
 class ExerciseTwo
 {
-    static void MainTwo() // there can be only one Main method in a single .cs file. Remove "One" from this method name for it to work
+    static void MainTwo() // there can be only one Main method in a single .cs file. Remove "Two" from this method name for it to work
     {
         bool is_running = true;
         while (is_running)
@@ -207,7 +207,7 @@ class ExerciseTwo
 
 class ExcerciseThree
 {
-    static void Main()
+    static void MainThree() // there can be only one Main method in a single .cs file. Remove "Three" from this method name for it to work
     {
         double[] tbl = FillArray();
 
@@ -267,7 +267,7 @@ class ExcerciseThree
         while (is_running);
     }
 
-    static double[] FillArray()
+    public static double[] FillArray()
     {
         double[] tbl = new double[10];
         Console.WriteLine($"Time to fill an array!");
@@ -283,5 +283,40 @@ class ExcerciseThree
         }
         return tbl;
 
+    }
+}
+
+
+/*  4. Write a program that allows input of 10 numbers. For the entered numbers, perform the following algorithms:
+*   - Calculate the sum of the array elements.
+*   - Calculate the product of the array elements.
+*   - Determine the average value.
+*   - Determine the minimum value.
+*   - Determine the maximum value.
+*   Display the results of the algorithms on the console.   */
+
+class ExcerciseFour
+{
+    static void Main()
+    {
+        double[] tbl = ExcerciseThree.FillArray();
+        double sum = tbl[0], product = tbl[0];
+        double min = tbl[0], max = tbl[0];
+        for (int i = 1; i < tbl.Length; i++)
+        {
+            double val = tbl[i];
+            sum += val;
+            product *= val;
+            if (val < min)
+            {
+                min = val;
+            }
+            if (val > max)
+            {
+                max = val;
+            }
+        }
+        double avg = sum / tbl.Length;
+        Console.WriteLine($"sum = {sum}; product = {product}; average = {avg}; min = {min}; max = {max}");
     }
 }
