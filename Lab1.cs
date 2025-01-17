@@ -205,7 +205,7 @@ class ExerciseTwo
 *    -  Display elements with even indexes.
 *    Display the results of the algorithms in the console. Create a menu to select the above functionalities. Use an extended else-if construct and a do-while loop to manage the menu.  */
 
-class ExcerciseThree
+class ExerciseThree
 {
     static void MainThree() // there can be only one Main method in a single .cs file. Remove "Three" from this method name for it to work
     {
@@ -295,11 +295,11 @@ class ExcerciseThree
 *   - Determine the maximum value.
 *   Display the results of the algorithms on the console.   */
 
-class ExcerciseFour
+class ExerciseFour
 {
-    static void Main()
+    static void MainFour()  // there can be only one Main method in a single .cs file. Remove "Four" from this method name for it to work
     {
-        double[] tbl = ExcerciseThree.FillArray();
+        double[] tbl = ExerciseThree.FillArray();
         double sum = tbl[0], product = tbl[0];
         double min = tbl[0], max = tbl[0];
         for (int i = 1; i < tbl.Length; i++)
@@ -318,5 +318,25 @@ class ExcerciseFour
         }
         double avg = sum / tbl.Length;
         Console.WriteLine($"sum = {sum}; product = {product}; average = {avg}; min = {min}; max = {max}");
+    }
+}
+
+
+// 5. Write a program that displays numbers from 20 to 0, excluding the numbers {2, 6, 9, 15, 19}. To exclude these numbers, use the continue statement.
+
+class ExerciseFive
+{
+    static void Main()
+    {
+        int[] excluded_numbers = { 2, 6, 9, 15, 19 };
+        for (int num = 20; num >= 0; num--) // for every num <20; 0>
+        {
+            if (Array.Exists(excluded_numbers, x => x == num))  // if num is in excluded_numbers
+            {
+                continue;   // next iteration
+            }
+            Console.Write($"{num} ");
+
+        }
     }
 }
