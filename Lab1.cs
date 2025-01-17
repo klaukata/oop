@@ -3,6 +3,12 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml.Serialization;
 using System.ComponentModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Xml.Linq;
+using System.Diagnostics;
 
 // The solutions should be defined using methods and appropriately called in the main function.
 
@@ -65,6 +71,7 @@ class ExerciseOne
     }
 }
 
+
 /* 2.  Write a calculator that computes: sum, difference, product, quotient, power, root, 
  * and values of trigonometric functions for a given angle. Use the Math library, e.g., Math.Sin(2.5). 
  * Please remember that the angle values passed to the functions are measured in radians. 
@@ -91,7 +98,8 @@ class ExerciseTwo
             Console.WriteLine("8. End the program");
 
             int choice = (int)ExerciseOne.TryConvert("choice");
-            switch (choice) {
+            switch (choice)
+            {
                 case 1:
                     Add();
                     break;
@@ -149,7 +157,7 @@ class ExerciseTwo
     {
         double a = ExerciseOne.TryConvert("a");
         double b = ExerciseOne.TryConvert("b");
-        if ( b == 0 )
+        if (b == 0)
         {
             Console.WriteLine("You can't devide by zero.");
             return;
@@ -186,5 +194,94 @@ class ExerciseTwo
         tg = Math.Round(Math.Tan(angle_rad), 2);
         cot = Math.Abs(tg) < 1e-10 ? double.PositiveInfinity : Math.Round(1 / tg, 2);
         Console.WriteLine($"Entered angle in radians = {angle_rad}\n sin = {sin}\n cos = {cos}\n tg = {tg}\n cot = {cot}");
+    }
+}
+
+
+/*  3. Write a program that allows input of 10 real numbers into an array. Then, implement the following functionalities using a for loop:
+*    -  Display the array from the first to the last index.
+*    -  Display the array from the last to the first index.
+*    -  Display elements with odd indexes.
+*    -  Display elements with even indexes.
+*    Display the results of the algorithms in the console. Create a menu to select the above functionalities. Use an extended else-if construct and a do-while loop to manage the menu.  */
+
+class ExcerciseThree
+{
+    static void Main()
+    {
+        double[] tbl = FillArray();
+
+        bool is_running = true;
+        do
+        {
+            Console.WriteLine("============MENU============");
+            Console.WriteLine("1. Display the array from the first to the last index");
+            Console.WriteLine("2. Display the array from the last to the first index");
+            Console.WriteLine("3. Display elements with odd indexes");
+            Console.WriteLine("4. Display elements with even indexes");
+            Console.WriteLine("5. Exit");
+            Console.Write("Choose an option (1-5): ");
+
+            string selected_option = Console.ReadLine();
+
+            if (selected_option == "1")
+            {
+                for (int i = 0; i < tbl.Length; i++)
+                {
+                    Console.Write($"{tbl[i]} ");
+                }
+            }
+            else if (selected_option == "2")
+            {
+                for (int i = tbl.Length - 1; i >= 0; i--)
+                {
+                    Console.Write($"{tbl[i]} ");
+                }
+            }
+            else if (selected_option == "3")
+            {
+                for (int i = 1; i < tbl.Length; i = i + 2)
+                {
+                    Console.Write($"{tbl[i]} ");
+                }
+            }
+            else if (selected_option == "4")
+            {
+                for (int i = 0; i < tbl.Length; i = i + 2)
+                {
+                    Console.Write($"{tbl[i]} ");
+                }
+            }
+            else if (selected_option == "5")
+            {
+                Console.WriteLine("Bye!");
+                is_running = false;
+            }
+            else
+            {
+                Console.WriteLine("Invalid option. Please choose a valid number (1-5).");
+            }
+            Console.WriteLine();
+
+        }
+        while (is_running);
+    }
+
+    static double[] FillArray()
+    {
+        double[] tbl = new double[10];
+        Console.WriteLine($"Time to fill an array!");
+        for (int i = 0; i < tbl.Length; i++)
+        {
+            Console.Write($"Enter number {i + 1}: ");
+
+            while (!double.TryParse(Console.ReadLine(), out tbl[i]))
+            {
+                Console.WriteLine("A string provided cannot be converted to a double. Try again.");
+                Console.Write($"Enter number {i + 1}: ");
+            }
+        }
+        return tbl;
+
     }
 }
