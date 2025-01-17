@@ -326,7 +326,7 @@ class ExerciseFour
 
 class ExerciseFive
 {
-    static void Main()
+    static void MainFive()  // there can be only one Main method in a single .cs file. Remove "Five" from this method name for it to work
     {
         int[] excluded_numbers = { 2, 6, 9, 15, 19 };
         for (int num = 20; num >= 0; num--) // for every num <20; 0>
@@ -337,6 +337,32 @@ class ExerciseFive
             }
             Console.Write($"{num} ");
 
+        }
+    }
+}
+
+
+/*  6. Write a program that continuously asks the user for integers. 
+*   The infinite loop should terminate when the user enters a number less than zero. Use the break statement to exit the infinite loop. */
+
+class ExerciseSix
+{
+    static void Main()
+    {
+        while (true)
+        {
+            Console.Write("Enter an ineger: ");
+            int input;
+            while (!int.TryParse(Console.ReadLine(), out input))
+            {
+                Console.WriteLine("Your input is not an integer. Try again.");
+                Console.Write("Enter an ineger: ");
+            }
+            if (input < 0)
+            {
+                Console.WriteLine("Provided integer is smaller than 0. Bye!");
+                break;
+            }
         }
     }
 }
